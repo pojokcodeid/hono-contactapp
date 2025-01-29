@@ -1,0 +1,56 @@
+### create user
+POST {{BASE_URL}}/api/users
+Content-Type: application/json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "StrongPassword@123",
+  "confirmPassword": "StrongPassword@123"
+}
+
+### update user
+PUT {{BASE_URL}}/api/users/3
+Authorization: Bearer {{$global.accessToken}}
+Content-Type: application/json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "StrongPassword@123",
+  "confirmPassword": "StrongPassword@123"
+}
+
+### get all user 
+GET {{BASE_URL}}/api/users
+Authorization: Bearer {{$global.accessToken}}
+
+### get user by id
+GET {{BASE_URL}}/api/users/1
+Authorization: Bearer {{$global.accessToken}}
+
+### user login
+POST {{BASE_URL}}/api/login
+Content-Type: application/json
+{
+  "email": "john@example.com",
+  "password": "StrongPassword@123"
+}
+
+{{
+  $global.accessToken=JSON.parse(response.body).data.token;
+  $global.refreshToken=JSON.parse(response.body).data.refreshToken;
+}}
+
+### refresh Token
+GET {{BASE_URL}}/api/refresh
+Authorization: Bearer {{$global.refreshToken}}
+{{
+  $global.accessToken=JSON.parse(response.body).data.token;
+  $global.refreshToken=JSON.parse(response.body).data.refreshToken;
+}}
+
+
+### delete user
+DELETE {{BASE_URL}}/api/users/3
+Authorization: Bearer {{$global.accessToken}}
+
+

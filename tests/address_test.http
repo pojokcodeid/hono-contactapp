@@ -1,0 +1,35 @@
+### create address
+POST {{BASE_URL}}/api/address
+Authorization: Bearer {{$global.accessToken}}
+Content-Type: application/json
+{
+  "addressName": "Home",
+  "address": "123 Main St",
+  "city": "Test City",
+  "province": "Test Province",
+  "country": "Test Country"
+}
+
+### update address
+PUT {{BASE_URL}}/api/address/1
+Authorization: Bearer {{$global.accessToken}}
+Content-Type: application/json
+{
+  "addressName": "",
+  "address": "123 Main St",
+  "city": "Test City",
+  "province": "Test Province",
+  "country": "Test Country"
+}
+
+### get all address
+GET {{BASE_URL}}/api/address
+Authorization: Bearer {{$global.accessToken}}
+
+### get address by id
+GET {{BASE_URL}}/api/address/1
+Authorization: Bearer {{$global.accessToken}}
+
+### delete address
+DELETE {{BASE_URL}}/api/address/1
+Authorization: Bearer {{$global.accessToken}}
