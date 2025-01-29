@@ -1,10 +1,12 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import userRoute from "./routes/userRoute";
 import Log from "./utils/Logger";
 import addressRoute from "./routes/addressRoute";
 
 const app = new Hono();
 
+app.use("*", cors());
 app.route("/api", userRoute);
 app.route("/api", addressRoute);
 app.get("/", (c) => {
