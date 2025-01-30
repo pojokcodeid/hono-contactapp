@@ -22,10 +22,8 @@ describe("JWT Utility Tests", () => {
   });
 
   it("should verify a valid token", async () => {
-    // const token = await generateAccessToken(mockUser);
-    const payload = await verifyToken(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwic3ViIjp7ImlkIjo0LCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IioqKioqKioqIiwiY3JlYXRlZEF0IjoiMjAyNS0wMS0zMFQxNToyMzo0NS45MjlaIiwidXBkYXRlZEF0IjoiMjAyNS0wMS0zMFQxNToyMzo0NS45MjlaIn0sImV4cCI6MTczODI1MzIxN30.8hRO-Ym-p053Jm5pzl52ZEBTu45jzMFTpCKThPSSReU"
-    );
+    const token = await generateAccessToken(mockUser);
+    const payload = await verifyToken(token);
     expect(payload).toHaveProperty("id", mockUser.id);
     expect(payload).toHaveProperty("sub", mockUser);
   });
