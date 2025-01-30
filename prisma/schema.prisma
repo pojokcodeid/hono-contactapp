@@ -14,26 +14,36 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement()) @map("id")
-  name      String    @map("name")
-  email     String    @unique @map("email")
-  password  String    @map("password")
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  Address   Address[]
+  id        Int        @id @default(autoincrement()) @map("id")
+  name      String     @map("name")
+  email     String     @unique @map("email")
+  password  String     @map("password")
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+  Personal  Personal[]
 
   @@map("user")
 }
 
+model Personal {
+  id      Int       @id @default(autoincrement())
+  name    String
+  userId  Int       @map("user_id")
+  user    User      @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  Address Address[]
+
+  @@map("personal")
+}
+
 model Address {
-  id          Int     @id @default(autoincrement()) @map("id")
-  addressName String  @map("address_name")
-  address     String  @map("address")
-  city        String? @map("city")
-  province    String  @map("province")
-  country     String  @map("country")
-  userId      Int     @map("user_id")
-  user        User    @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  id          Int      @id @default(autoincrement()) @map("id")
+  addressName String   @map("address_name")
+  address     String   @map("address")
+  city        String?  @map("city")
+  province    String   @map("province")
+  country     String   @map("country")
+  personalId  Int      @map("personal_id")
+  personal    Personal @relation(fields: [personalId], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
   @@map("address")
 }

@@ -34,7 +34,7 @@ class AddressModel implements IAddressModel {
         city: address.city || undefined,
         province: address.province || undefined,
         country: address.country || undefined,
-        userId: address.userId || undefined,
+        personalId: address.personalId || undefined,
       },
     });
   }

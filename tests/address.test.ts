@@ -1,5 +1,6 @@
 import { describe, it, expect, afterAll, beforeAll } from "bun:test";
 import prisma from "../src/utils/prismaClient";
+import { Personal } from "@prisma/client";
 
 const BASE_URL = "http://localhost:3000/api";
 let token = "";
@@ -11,17 +12,25 @@ const userDummy = {
   confirmPassword: "StrongPassword@123",
 };
 
+const personal = {
+  id: 1,
+  name: "Test Personal",
+  userId: 1,
+} as Personal;
+
 const addressDummy = {
   addressName: "Home",
   address: "123 Main St",
   city: "New York",
   province: "NY",
   country: "USA",
+  personalId: 1,
 };
 
 beforeAll(async () => {
   await prisma.$connect();
   await prisma.address.deleteMany();
+  await prisma.personal.deleteMany();
   await prisma.user.deleteMany();
   await prisma.$executeRaw`ALTER TABLE user AUTO_INCREMENT = 1`;
   await prisma.$executeRaw`ALTER TABLE address AUTO_INCREMENT = 1`;
@@ -41,7 +50,20 @@ beforeAll(async () => {
     }),
   });
   const user = await responseLogin.json();
+  personal.userId = user.data.id;
   token = user.data.token;
+
+  // insert new personal
+  const response = await fetch(`${BASE_URL}/personal`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(personal),
+  });
+  const body = await response.json();
+  addressDummy.personalId = body.data.id;
 });
 
 afterAll(async () => {

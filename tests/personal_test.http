@@ -1,0 +1,8 @@
+### create personal
+POST {{BASE_URL}}/api/personal
+Authorization: Bearer {{$global.accessToken}}
+Content-Type: application/json
+{
+  "name": "Test Personal",
+  "userId": 1
+}

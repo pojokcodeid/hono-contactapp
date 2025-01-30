@@ -20,16 +20,15 @@ class AddressController {
   async createAddress(c: Context) {
     try {
       const body = await c.req.json();
-      const { addressName, address, city, province, country } =
+      const { addressName, address, city, province, country, personalId } =
         await validateAddress.parse(body);
-      const userId = c.get("user_id");
       const addressInserted = await AddressModel.create({
         addressName,
         address,
         city,
         province,
         country,
-        userId,
+        personalId,
       } as Address);
 
       return c.json(
@@ -68,16 +67,15 @@ class AddressController {
     try {
       const id = c.req.param("id");
       const body = await c.req.json();
-      const { addressName, address, city, province, country } =
+      const { addressName, address, city, province, country, personalId } =
         await validateAddress.parse(body);
-      const userId = c.get("user_id");
       const addressUpdated = await AddressModel.update(Number(id), {
         addressName,
         address,
         city,
         province,
         country,
-        userId,
+        personalId,
       } as Address);
       return c.json(
         { message: "Address updated successfully", data: addressUpdated },

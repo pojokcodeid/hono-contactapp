@@ -9,6 +9,7 @@ describe("AddressValidation Tests", () => {
       city: "Test City",
       province: "Test Province",
       country: "Test Country",
+      personalId: 1,
     };
 
     const validationResult = validateAddress.safeParse(validAddress);
@@ -21,6 +22,7 @@ describe("AddressValidation Tests", () => {
       city: "Test City",
       province: "Test Province",
       country: "Test Country",
+      personalId: 1,
     };
 
     const validationResult = validateAddress.safeParse(invalidAddress);
@@ -33,6 +35,7 @@ describe("AddressValidation Tests", () => {
       city: "Test City",
       province: "Test Province",
       country: "Test Country",
+      personalId: 1,
     };
 
     const validationResult = validateAddress.safeParse(invalidAddress);
@@ -43,6 +46,7 @@ describe("AddressValidation Tests", () => {
     const validAddress = {
       addressName: "Home",
       address: "123 Main St",
+      personalId: 1,
     };
 
     const validationResult = validateAddress.safeParse(validAddress);

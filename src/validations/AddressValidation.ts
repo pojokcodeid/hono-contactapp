@@ -6,4 +6,5 @@ export const validateAddress: ZodType = z.object({
   city: z.string().optional(),
   province: z.string().optional(),
   country: z.string().optional(),
+  personalId: z.number().min(1, { message: "Personal ID is required" }),
 });
