@@ -2,13 +2,11 @@ import { sign, verify } from "hono/jwt";
 import { type User } from "@prisma/client";
 
 const secret = (process.env.JWT_SECRET as string) || "secret_password";
-const expired =
-  Number(process.env.JWT_EXPIRES_IN) || Math.floor(Date.now() / 1000) + 60 * 15; // Token expires in 15 minutes
+const expired = Number(process.env.JWT_EXPIRES_IN) || 60 * 15; // Token expires in 15 minutes
 const secretRefresh =
   (process.env.JWT_SECRET_REFRESH as string) || "secret_refresh";
 const expiredRefresh =
-  Number(process.env.JWT_REFRESH_EXPIRES_IN) ||
-  Math.floor(Date.now() / 1000) + 60 * 60 * 24; // Token expires in 24 hours
+  Number(process.env.JWT_REFRESH_EXPIRES_IN) || 60 * 60 * 24; // Token expires in 24 hours
 
 /**
  * Generates a JWT access token for a given user object.
@@ -20,7 +18,7 @@ export const generateAccessToken = async (objSub: User) => {
   const payload = {
     id: objSub.id,
     sub: objSub,
-    exp: expired,
+    exp: Math.floor(Date.now() / 1000) + expired,
   };
   const token = await sign(payload, secret);
   return token;
@@ -29,7 +27,7 @@ export const generateRefreshToken = async (objSub: User) => {
   const payload = {
     id: objSub.id,
     sub: objSub,
-    exp: expiredRefresh,
+    exp: Math.floor(Date.now() / 1000) + expiredRefresh,
   };
   const token = await sign(payload, secretRefresh);
   return token;

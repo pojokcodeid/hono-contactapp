@@ -236,22 +236,22 @@ class UserController {
 
   async refreshToken(c: Context) {
     const authHeader = c.req.header("Authorization");
-    const token = authHeader?.split(" ")[1];
+    const tokenRefresh = authHeader?.split(" ")[1];
     // check if token is present
-    if (!token) {
+    if (!tokenRefresh) {
       return c.json({ message: "Unauthorized", data: null }, 401);
     }
     try {
-      const payload = await verifyRefreshToken(token);
+      const payload = await verifyRefreshToken(tokenRefresh);
       const user = await UserModel.findById(Number(payload.id));
       if (!user) {
         return c.json({ message: "Unauthorized", data: null }, 401);
       }
-      const newToken = await generateAccessToken(user);
+      const token = await generateAccessToken(user);
       const refreshToken = await generateRefreshToken(user);
       return c.json({
         message: "Token refreshed successfully",
-        data: { ...user, token: newToken, refreshToken },
+        data: { ...user, token, refreshToken },
       });
     } catch {
       return c.json({ message: "Unauthorized", data: null }, 401);
