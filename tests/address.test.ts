@@ -197,6 +197,21 @@ describe("REST API ADDRESSES", () => {
     expect(body.message).toEqual("Unauthorized");
   });
 
+  it("should get address by personal id with GET /api/address/personal/:id", async () => {
+    const response = await fetch(
+      `${BASE_URL}/address/personal/${personal.id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const body = await response.json();
+    expect(response.status).toBe(200);
+    expect(Array.isArray(body.data)).toBe(true);
+  });
+
   it("should delete address by id with DELETE /api/address/:id", async () => {
     const response = await fetch(`${BASE_URL}/address/${insertedId}`, {
       method: "DELETE",

@@ -7,6 +7,9 @@ class PerssonalModel implements IPersonalModel {
   constructor() {
     this.prisma = prisma;
   }
+  findByUserId(userId: number): Promise<Personal[]> {
+    return this.prisma.personal.findMany({ where: { userId } });
+  }
   create(personal: Personal): Promise<Personal> {
     return this.prisma.personal.create({ data: personal });
   }

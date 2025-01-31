@@ -123,6 +123,32 @@ class PersonalController {
     }
   }
 
+  async getPersonalByUserId(c: Context) {
+    try {
+      const userId = c.get("user_id");
+      const personal = await PerssonalModel.findByUserId(Number(userId));
+      if (!personal) {
+        return c.json({ message: "Personal not found", data: null }, 404);
+      }
+      return c.json({ message: "Personal found", data: personal }, 200);
+    } catch (error) {
+      Log.error(
+        "Error ./controllers/PersonalController.getPersonalByUserId " + error
+      );
+      if (error instanceof Error) {
+        let message = error.message;
+        try {
+          message = JSON.parse(error.message)[0].message;
+        } catch {
+          message = error.message;
+        }
+        return c.json({ message, data: null }, 400);
+      } else {
+        return c.json({ message: "Internal Server Error", data: null }, 500);
+      }
+    }
+  }
+
   async getAllPersonal(c: Context) {
     try {
       const personals = await PerssonalModel.findAll();

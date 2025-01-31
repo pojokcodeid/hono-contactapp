@@ -158,6 +158,28 @@ describe("REST API PERSONAL", () => {
     expect(body.message).toEqual("Unauthorized");
   });
 
+  it("should personal by user id with GET /api/personal/user", async () => {
+    const response = await fetch(`${BASE_URL}/personal/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const body = await response.json();
+    expect(response.status).toBe(200);
+    expect(Array.isArray(body.data)).toBe(true);
+  });
+
+  it("should unathorize if get personal by user id without token", async () => {
+    const response = await fetch(`${BASE_URL}/personal/user`, {
+      method: "GET",
+    });
+    const body = await response.json();
+    expect(response.status).toBe(401);
+    expect(body.message).toEqual("Unauthorized");
+  });
+
   it("should get personal by id with id not found", async () => {
     const response = await fetch(`${BASE_URL}/personal/0`, {
       method: "GET",

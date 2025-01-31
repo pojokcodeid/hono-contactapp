@@ -60,6 +60,16 @@ class AddressModel implements IAddressModel {
   }
 
   /**
+   * Retrieves all address records from the database for a given personal ID.
+   *
+   * @param personalId - The personal ID to find addresses for.
+   * @returns A promise that resolves to an array of addresses.
+   */
+  findByPersonalId(personalId: number): Promise<Address[]> {
+    return this.prisma.address.findMany({ where: { personalId } });
+  }
+
+  /**
    * Retrieves all address records from the database.
    *
    * @returns A promise that resolves to an array of addresses.

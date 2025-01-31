@@ -162,6 +162,29 @@ class AddressController {
     }
   }
 
+  async getAddressByPersonalId(c: Context) {
+    try {
+      const id = c.req.param("id");
+      const address = await AddressModel.findByPersonalId(Number(id));
+      return c.json({ message: "Address found", data: address }, 200);
+    } catch (error) {
+      Log.error(
+        "Error ./controllers/AddressController.getAddressByPersonalId " + error
+      );
+      if (error instanceof Error) {
+        let message = error.message;
+        try {
+          message = JSON.parse(error.message)[0].message;
+        } catch {
+          message = error.message;
+        }
+        return c.json({ message, data: null }, 400);
+      } else {
+        return c.json({ message: "Internal Server Error", data: null }, 500);
+      }
+    }
+  }
+
   /**
    * Deletes an address record by its ID from the database.
    *

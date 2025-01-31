@@ -12,8 +12,8 @@ const personal = {
 
 describe("PerssonalModel Tests", () => {
   beforeAll(async () => {
-    await prisma.user.deleteMany();
     await prisma.personal.deleteMany();
+    await prisma.user.deleteMany();
     const user = await prisma.user.create({
       data: {
         name: "Test User",
@@ -45,6 +45,13 @@ describe("PerssonalModel Tests", () => {
   it("should find a personal entry by id", async () => {
     const foundPersonal = await PerssonalModel.findById(personal.id);
     expect(foundPersonal).toHaveProperty("id", personal.id);
+  });
+
+  it("should find a personal entry by user id", async () => {
+    const foundPersonals = await PerssonalModel.findByUserId(personal.userId);
+    expect(foundPersonals).toBeInstanceOf(Array);
+    expect(foundPersonals.length).toBeGreaterThan(0);
+    expect(foundPersonals[0]).toHaveProperty("id");
   });
 
   it("should find all personal entries", async () => {

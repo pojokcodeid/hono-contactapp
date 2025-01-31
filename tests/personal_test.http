@@ -6,3 +6,10 @@ Content-Type: application/json
   "name": "Test Personal",
   "userId": 1
 }
+
+### get personal by userId
+GET {{BASE_URL}}/api/personal/1
+Authorization: Bearer {{$global.accessToken}}
+### get personal by userId
+GET {{BASE_URL}}/api/personal/user
+Authorization: Bearer {{$global.accessToken}}

@@ -15,7 +15,6 @@ const expiredRefresh =
  * @returns A promise that resolves to the JWT access token.
  */
 export const generateAccessToken = async (objSub: User) => {
-  console.log(Math.floor(Date.now() / 1000) + expired);
   const payload = {
     id: objSub.id,
     sub: objSub,
@@ -25,7 +24,6 @@ export const generateAccessToken = async (objSub: User) => {
   return token;
 };
 export const generateRefreshToken = async (objSub: User) => {
-  console.log("refresh", Math.floor(Date.now() / 1000) + expiredRefresh);
   const payload = {
     id: objSub.id,
     sub: objSub,

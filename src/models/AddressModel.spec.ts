@@ -70,6 +70,12 @@ describe("AddressModel Tests", () => {
     expect(foundAddress).toHaveProperty("id");
     expect(foundAddress?.addressName).toBe(address.addressName);
   });
+  it("should find an address by personal id", async () => {
+    const foundAddress = await AddressModel.findByPersonalId(personal.id);
+    expect(foundAddress).toBeInstanceOf(Array);
+    expect(foundAddress.length).toBeGreaterThan(0);
+    expect(foundAddress[0]).toHaveProperty("id");
+  });
 
   it("should find all addresses", async () => {
     const foundAddresses = await AddressModel.findAll();
