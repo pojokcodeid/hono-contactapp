@@ -207,10 +207,14 @@ class UserController {
       const user = await UserModel.verifyUser(email, password);
       let token = null;
       let refreshToken = null;
-      if (user) {
-        token = await generateAccessToken(user);
-        refreshToken = await generateRefreshToken(user);
+      if (!user) {
+        return c.json(
+          { message: "Invalid email or password", data: null },
+          400
+        );
       }
+      token = await generateAccessToken(user);
+      refreshToken = await generateRefreshToken(user);
       return c.json(
         {
           message: "User logged in successfully",

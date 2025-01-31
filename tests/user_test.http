@@ -32,7 +32,7 @@ POST {{BASE_URL}}/api/login
 Content-Type: application/json
 {
   "email": "john@example.com",
-  "password": "StrongPassword@123"
+  "password": "a"
 }
 
 {{
