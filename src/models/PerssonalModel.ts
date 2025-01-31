@@ -16,8 +16,11 @@ class PerssonalModel implements IPersonalModel {
   update(id: number, personal: Personal): Promise<Personal> {
     return this.prisma.personal.update({ where: { id }, data: personal });
   }
-  delete(id: number): Promise<Personal> {
-    return this.prisma.personal.delete({ where: { id } });
+  async delete(id: number): Promise<Personal> {
+    return await this.prisma.$transaction(async (prisma) => {
+      await prisma.address.deleteMany({ where: { personalId: id } });
+      return await prisma.personal.delete({ where: { id } });
+    });
   }
   findById(id: number): Promise<Personal | null> {
     return this.prisma.personal.findUnique({ where: { id } });
