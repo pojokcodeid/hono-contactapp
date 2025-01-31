@@ -27,7 +27,7 @@ GET {{BASE_URL}}/api/address
 Authorization: Bearer {{$global.accessToken}}
 
 ### get address by id
-GET {{BASE_URL}}/api/address/1
+GET {{BASE_URL}}/api/address/2
 Authorization: Bearer {{$global.accessToken}}
 
 ### delete address

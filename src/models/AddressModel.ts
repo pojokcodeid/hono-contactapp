@@ -56,7 +56,10 @@ class AddressModel implements IAddressModel {
    * @returns A promise that resolves to the found address, or null if it does not exist.
    */
   findById(id: number): Promise<Address | null> {
-    return this.prisma.address.findUnique({ where: { id } });
+    return this.prisma.address.findUnique({
+      where: { id },
+      include: { personal: true },
+    });
   }
 
   /**
