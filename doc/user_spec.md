@@ -85,7 +85,8 @@ http://localhost:3000/api
     "password": "********",
     "createdAt": "2025-01-29T10:48:30.480Z",
     "updatedAt": "2025-01-29T10:48:44.819Z",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywic3ViIjp7ImlkIjozLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IioqKioqKioqIiwiY3JlYXRlZEF0IjoiMjAyNS0wMS0yOVQxMDo0ODozMC40ODBaIiwidXBkYXRlZEF0IjoiMjAyNS0wMS0yOVQxMDo0ODo0NC44MTlaIn0sImV4cCI6MTczODE0ODIyNX0.jlAT_6o8c6hHuHifCGFeZ8hginaW5DiwmGk9-KFL28Q"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywic3ViIjp7ImlkIjozLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IioqKioqKioqIiwiY3JlYXRlZEF0IjoiMjAyNS0wMS0yOVQxMDo0ODozMC40ODBaIiwidXBkYXRlZEF0IjoiMjAyNS0wMS0yOVQxMDo0ODo0NC44MTlaIn0sImV4cCI6MTczODE0ODIyNX0.jlAT_6o8c6hHuHifCGFeZ8hginaW5DiwmGk9-KFL28Q",
+    "refeshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywic3ViIjp7ImlkIjozLCJuYW1lIjoiSm9obiBEb2UiLCJlbWFpbCI6ImpvaG5AZXhhbXBsZS5jb20iLCJwYXNzd29yZCI6IioqKioqKioqIiwiY3JlYXRlZEF0IjoiMjAyNS0wMS0yOVQxMDo0ODozMC40ODBaIiwidXBkYXRlZEF0IjoiMjAyNS0wMS0yOVQxMDo0ODo0NC44MTlaIn0sImV4cCI6MTczODE0ODIyNX0.jlAT_6o8c6hHuHifCGFeZ8hginaW5DiwmGk9-KFL28Q"
   }
 }
 ```
@@ -130,6 +131,125 @@ http://localhost:3000/api
   "message": "User updated successfully",
   "data": {
     "id": 3,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "********",
+    "createdAt": "2025-01-29T10:48:30.480Z",
+    "updatedAt": "2025-01-29T10:48:44.819Z"
+  }
+}
+```
+
+- Error (401)
+
+```json
+{
+  "message": "Unauthorized",
+  "data": null
+}
+```
+
+## Endpoints Delete User
+
+### Request
+
+- Method
+  DELETE
+- URL
+  {{BASE_URl}}/users/1
+- Header
+  Content-Type: application/json
+  Authorization: Bearer xxxxxxxxxxxxxxxxxxxxx
+- Request Body
+
+### Response
+
+- Success (200)
+
+```json
+{
+  "message": "User deleted successfully",
+  "data": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "********",
+    "createdAt": "2025-01-29T10:48:30.480Z",
+    "updatedAt": "2025-01-29T10:48:44.819Z"
+  }
+}
+```
+
+- Error (401)
+
+```json
+{
+  "message": "Unauthorized",
+  "data": null
+}
+```
+
+## Endpoints Get All User
+
+### Request
+
+- Method
+  GET
+- URL
+  {{BASE_URl}}/users
+- Header
+  Content-Type: application/json
+  Authorization: Bearer xxxxxxxxxxxxxxxxxxxxx
+- Request Body
+
+### Response
+
+- Success (200)
+
+```json
+{
+  "message": "Users found",
+  "data": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "********",
+      "createdAt": "2025-01-29T10:48:30.480Z",
+      "updatedAt": "2025-01-29T10:48:44.819Z"
+    }
+  ]
+}
+```
+
+- Error (401)
+
+```json
+{
+  "message": "Unauthorized",
+  "data": null
+}
+```
+
+## Endpoints Get All User
+
+### Request
+
+- Method
+  GET
+- URL
+  {{BASE_URl}}/users/1
+- Header
+  Content-Type: application/json
+  Authorization: Bearer xxxxxxxxxxxxxxxxxxxxx
+- Request Body
+- Success (200)
+
+```json
+{
+  "message": "Users found",
+  "data": {
+    "id": 1,
     "name": "John Doe",
     "email": "john@example.com",
     "password": "********",
